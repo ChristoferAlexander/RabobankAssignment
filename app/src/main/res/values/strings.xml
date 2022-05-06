@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">RabobankAssignment</string>
+
+    <string name="btn_download">Download file</string>
+    <string name="btn_ok">OK</string>
+
+    <string name="error_unknown">Unknown error</string>
+
+    <string name="dialog_title_error">Error</string>
+
+</resources>
