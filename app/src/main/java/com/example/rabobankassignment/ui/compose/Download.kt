@@ -28,7 +28,7 @@ object DownloadRoute : NavRoute<DownloadViewModel> {
         DownloadScreen(
             startDownload = viewModel::startDownload,
             state = viewModel.state,
-            effectFlow = viewModel.effects.receiveAsFlow(),
+            effectFlow = viewModel.effectsFlow,
         )
 }
 

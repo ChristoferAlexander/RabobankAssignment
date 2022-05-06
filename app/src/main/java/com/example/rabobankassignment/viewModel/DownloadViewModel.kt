@@ -17,6 +17,7 @@ import com.example.rabobankassignment.ui.compose.DisplayRoute
 import com.example.rabobankassignment.ui.nav.RouteNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -38,8 +39,8 @@ class DownloadViewModel @Inject constructor(
     var state by mutableStateOf<State>(State.Empty)
         private set
 
-    var effects = Channel<Effect>(Channel.UNLIMITED)
-        private set
+    private val effects = Channel<Effect>(Channel.UNLIMITED)
+    val effectsFlow = effects.receiveAsFlow()
 
     fun startDownload() {
         viewModelScope.launch {

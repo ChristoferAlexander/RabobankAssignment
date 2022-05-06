@@ -1,17 +1,20 @@
+@file:OptIn(ExperimentalFoundationApi::class)
+
 package com.example.rabobankassignment.ui.compose
 
 import android.net.Uri
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.lazy.GridCells
+import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.Modifier.Companion
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,7 +41,7 @@ object DisplayRoute : NavRoute<DisplayViewModel> {
     override val route = "display/{$KEY_DISPLAY_DATA}"
 
     /**
-     * Call this to navigate to [DisplayRoute] with args
+     * Call this to get navigation path to [DisplayRoute] with args
      *
      * NOTE: Not a very clean way to handle nav args TODO improve
      */
@@ -62,8 +65,6 @@ object DisplayRoute : NavRoute<DisplayViewModel> {
     override fun Content(viewModel: DisplayViewModel) = LoadedScreen(viewModel.data)
 }
 
-
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun LoadedScreen(data: CsvResult) {
     LazyVerticalGrid(
@@ -110,7 +111,10 @@ fun RecordGridItem(csvRecordValue: CsvRecordValue) {
 
 @Composable
 fun StringValueItem(value: String) {
-    Text(text = value)
+    Text(
+        text = value,
+        style = TextStyle(fontSize = 16.sp, textAlign = TextAlign.Center)
+    )
 }
 
 @Preview
