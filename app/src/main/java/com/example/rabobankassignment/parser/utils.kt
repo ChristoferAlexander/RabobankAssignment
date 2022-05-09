@@ -16,7 +16,7 @@ fun parseCsv(sourceConfig: CsvSourceConfig): CsvTable {
         val lineIterator = lines.iterator()
         if (!lineIterator.hasNext()) return CsvTable(CsvHeader(emptyList()), emptyList())
         val splitByComma = createLineSplitter()
-        var trimmedHeaderLine: String? = null
+        val trimmedHeaderLine: String?
         var csvHeader: CsvHeader? = null
         if (sourceConfig.hasHeader) {
             trimmedHeaderLine = removeBomChars(lineIterator.next())

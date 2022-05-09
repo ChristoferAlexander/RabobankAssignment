@@ -1,6 +1,5 @@
-package com.example.rabobankassignment.repository
+package com.example.rabobankassignment.api
 
-import com.example.rabobankassignment.api.ApiResult
 import okhttp3.ResponseBody
 import retrofit2.http.GET
 import javax.inject.Inject

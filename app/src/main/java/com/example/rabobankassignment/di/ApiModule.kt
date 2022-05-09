@@ -1,8 +1,8 @@
 package com.example.rabobankassignment.di
 
 import com.example.rabobankassignment.api.NetworkResultCallAdapterFactory
-import com.example.rabobankassignment.repository.CsvApi
-import com.example.rabobankassignment.repository.CsvApi.Companion.API_URL
+import com.example.rabobankassignment.api.CsvApi
+import com.example.rabobankassignment.api.CsvApi.Companion.API_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

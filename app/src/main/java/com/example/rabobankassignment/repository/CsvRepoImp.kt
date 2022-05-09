@@ -1,6 +1,7 @@
 package com.example.rabobankassignment.repository
 
 import com.example.rabobankassignment.api.ApiResult
+import com.example.rabobankassignment.api.CsvApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
