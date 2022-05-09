@@ -16,7 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "com.example.android.dagger.CustomTestRunner"
+        testInstrumentationRunner "com.example.rabobankassignment.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary true
         }
