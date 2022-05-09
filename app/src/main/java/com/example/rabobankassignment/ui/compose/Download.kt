@@ -3,17 +3,19 @@ package com.example.rabobankassignment.ui.compose
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.rabobankassignment.R.string
+import com.example.rabobankassignment.ui.nav.NavRoute
 import com.example.rabobankassignment.viewModel.DownloadViewModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.receiveAsFlow
-import com.example.rabobankassignment.ui.nav.NavRoute
 import kotlinx.coroutines.flow.flowOf
 
 object DownloadRoute : NavRoute<DownloadViewModel> {
