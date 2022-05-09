@@ -8,15 +8,16 @@ import androidx.lifecycle.viewModelScope
 import com.example.rabobankassignment.api.ApiError
 import com.example.rabobankassignment.api.ApiException
 import com.example.rabobankassignment.api.ApiSuccess
-import com.example.rabobankassignment.model.CsvResult
+import com.example.rabobankassignment.model.CsvNavResult
 import com.example.rabobankassignment.parser.CsvRecordResult
 import com.example.rabobankassignment.parser.CsvSourceConfig
 import com.example.rabobankassignment.parser.parseCsv
-import com.example.rabobankassignment.repository.CsvRepo
+import com.example.rabobankassignment.repository.CsvRepoImp
 import com.example.rabobankassignment.ui.compose.DisplayRoute
 import com.example.rabobankassignment.ui.nav.RouteNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,7 +25,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DownloadViewModel @Inject constructor(
     private val routeNavigator: RouteNavigator,
-    private val repository: CsvRepo
+    private val repository: CsvRepoImp
 ) : ViewModel(), RouteNavigator by routeNavigator {
 
     sealed class State {
@@ -55,16 +56,17 @@ class DownloadViewModel @Inject constructor(
                     effects.send(Effect.Error(result.error.localizedMessage))
                 }
                 is ApiSuccess -> {
-                    val scvTable = parseCsv(CsvSourceConfig(result.data.byteStream()))
                     // TODO handle failed records, maybe show the failed record in an error line
+                    val csvTable = parseCsv(CsvSourceConfig(result.data.byteStream()))
                     navigateToRoute(
                         DisplayRoute.getWithArgs(
-                            CsvResult(
-                                columns = scvTable.header.columnNames,
-                                records = scvTable.csvRecordResults.filterIsInstance<CsvRecordResult.Success>().map { it.record }
+                            CsvNavResult(
+                                columns = csvTable.header?.columnNames,
+                                records = csvTable.csvRecordResults.filterIsInstance<CsvRecordResult.Success>().map { it.record }
                             )
                         )
                     )
+                    state = State.Empty
                 }
             }
         }
