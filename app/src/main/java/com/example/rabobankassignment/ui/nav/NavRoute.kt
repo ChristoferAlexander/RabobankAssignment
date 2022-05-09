@@ -47,7 +47,7 @@ interface NavRoute<T : RouteNavigator> {
         builder.composable(route, getArguments()) {
             val viewModel = viewModel()
             val viewStateAsState by viewModel.navigationState.collectAsState()
-
+            // Observe for navigation within the ViewModel
             LaunchedEffect(viewStateAsState) {
                 Log.d("Nav", "${this@NavRoute} updateNavigationState to $viewStateAsState")
                 updateNavigationState(navHostController, viewStateAsState, viewModel::onNavigated)
@@ -57,9 +57,6 @@ interface NavRoute<T : RouteNavigator> {
         }
     }
 
-    /**
-     * Navigates to viewState.
-     */
     private fun updateNavigationState(
         navHostController: NavHostController,
         navigationState: NavigationState,
@@ -84,6 +81,4 @@ interface NavRoute<T : RouteNavigator> {
 }
 
 fun <T> SavedStateHandle.getOrThrow(key: String): T =
-    get<T>(key) ?: throw IllegalArgumentException(
-        "Mandatory argument $key missing in arguments."
-    )
+    get<T>(key) ?: throw IllegalArgumentException("Mandatory argument $key missing in arguments.")
