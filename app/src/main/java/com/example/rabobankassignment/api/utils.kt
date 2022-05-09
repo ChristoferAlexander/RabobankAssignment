@@ -1,6 +1,6 @@
 package com.example.rabobankassignment.api
 
-import android.util.Patterns
+import android.webkit.URLUtil
 import okhttp3.Request
 import okio.Timeout
 import retrofit2.*
@@ -87,4 +87,4 @@ private fun <T : Any> handleApi(execute: () -> Response<T>): ApiResult<T> {
     }
 }
 
-fun String.isValidUrl(): Boolean = Patterns.WEB_URL.matcher(this).matches()
+fun String?.isValidUrl(): Boolean = this?.let { URLUtil.isValidUrl(it).also { println("DEBUG isValid=$it") } } ?: false.also { println("DEBUG isValid=$it") }
