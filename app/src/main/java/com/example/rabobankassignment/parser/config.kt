@@ -6,7 +6,8 @@ import java.nio.charset.Charset
 data class CsvSourceConfig (
     val stream: InputStream,
     val charset: Charset = Charsets.UTF_8,
-    val separatorChar: Char = ','
+    val separatorChar: Char = ',',
+    val quoteChar: Char = '"'
 )
 
 fun CsvSourceConfig.bufferedReader() = stream.bufferedReader(charset)
