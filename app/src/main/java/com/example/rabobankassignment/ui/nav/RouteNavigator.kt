@@ -16,7 +16,7 @@ interface RouteNavigator {
     val navigationState: StateFlow<NavigationState>
 }
 
-class CustomRouteNavigator : RouteNavigator {
+class RouteNavigatorIml : RouteNavigator {
 
     override val navigationState: MutableStateFlow<NavigationState> =
         MutableStateFlow(NavigationState.Idle)

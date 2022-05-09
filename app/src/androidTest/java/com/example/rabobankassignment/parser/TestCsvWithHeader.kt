@@ -1,10 +1,8 @@
-package com.example.rabobankassignment
+package com.example.rabobankassignment.parser
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.rabobankassignment.parser.CsvRecordResult
 import com.example.rabobankassignment.parser.CsvRecordValue.Value.*
-import com.example.rabobankassignment.parser.CsvSourceConfig
-import com.example.rabobankassignment.parser.parseCsv
+import com.example.rabobankassignment.toInputStream
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test

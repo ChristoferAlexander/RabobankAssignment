@@ -1,4 +1,4 @@
-package com.example.rabobankassignment
+package com.example.rabobankassignment.parser
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Test
