@@ -38,7 +38,6 @@ fun RabobankAssignmentTheme(darkTheme: Boolean = isSystemInDarkTheme(), content:
     MaterialTheme(
         colors = colors,
         typography = Typography,
-        shapes = Shapes,
         content = content
     )
 }
