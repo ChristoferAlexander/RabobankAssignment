@@ -10,15 +10,13 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class CsvResult(val columns: List<String>, val records: List<CsvRecord>) : Parcelable
 
-class CsvResultParamType : NavType<CsvResult>(isNullableAllowed = false) {
-    override fun get(bundle: Bundle, key: String): CsvResult? {
-        return bundle.getParcelable(key)
-    }
+class CsvResultNavType : NavType<CsvResult>(isNullableAllowed = false) {
+    override fun get(bundle: Bundle, key: String): CsvResult? =
+        bundle.getParcelable(key)
 
-    override fun parseValue(value: String): CsvResult {
-        val a = Gson().fromJson(value, CsvResult::class.java)
-        return a
-    }
+    override fun parseValue(value: String): CsvResult =
+        Gson().fromJson(value, CsvResult::class.java)
+
 
     override fun put(bundle: Bundle, key: String, value: CsvResult) {
         bundle.putParcelable(key, value)

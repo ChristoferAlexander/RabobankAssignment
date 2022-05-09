@@ -9,7 +9,5 @@ import javax.inject.Singleton
 
 @Singleton
 class CsvRepo @Inject constructor(private val csvApi: CsvApi) {
-
     suspend fun invoke(): ApiResult<ResponseBody> = withContext(Dispatchers.IO) { csvApi.getCsvFile() }
-
 }

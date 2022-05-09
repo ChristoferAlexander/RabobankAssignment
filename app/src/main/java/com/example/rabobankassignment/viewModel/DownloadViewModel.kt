@@ -61,18 +61,8 @@ class DownloadViewModel @Inject constructor(
                         DisplayRoute.getWithArgs(
                             CsvResult(
                                 columns = scvTable.header.columnNames,
-                                records = scvTable.csvRecordResults.filterIsInstance<CsvRecordResult.Success>()
-                                    .map { it.record }
-                                /*.map {
-                                        it.record.elements.map {
-                                            when (it) {
-                                                is IntValue -> it.value.toString()
-                                                is StringValue -> it.value
-                                                is DateValue -> it.value.toString()
-                                                is UrlValue -> it.value.toString()
-                                            }
-                                        }
-                                    }*/)
+                                records = scvTable.csvRecordResults.filterIsInstance<CsvRecordResult.Success>().map { it.record }
+                            )
                         )
                     )
                 }
