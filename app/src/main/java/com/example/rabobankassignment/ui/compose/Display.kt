@@ -88,7 +88,7 @@ fun LoadedLayout(data: CsvNavResult) {
     // needs a custom implementation on LazyRow and LazyColumn so it can show items without header
     // right now it will do a best effort attempt
     LazyVerticalGrid(
-        cells = data.columns?.let { GridCells.Fixed(it.size) } ?: GridCells.Adaptive(80.dp),
+        cells = data.columns?.let { GridCells.Fixed(it.size) } ?: GridCells.Adaptive(dimensionResource(R.dimen.min_record_height)),
         state = rememberLazyListState(),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_tiny)),
         horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_tiny)),
@@ -96,13 +96,13 @@ fun LoadedLayout(data: CsvNavResult) {
     ) {
         data.columns?.let {
             items(it) { header ->
-                Box(modifier = Modifier.heightIn(50.dp).background(Color.White)) {
+                Box(modifier = Modifier.heightIn(dimensionResource(R.dimen.min_header_height)).background(Color.White)) {
                     HeaderGridItem(header)
                 }
             }
         }
         items(data.records.map { it.elements }.flatten()) { record ->
-            Box(modifier = Modifier.heightIn(80.dp).background(Color.White)) {
+            Box(modifier = Modifier.heightIn(dimensionResource(R.dimen.min_record_height)).background(Color.White)) {
                 RecordGridItem(record)
             }
         }
@@ -165,7 +165,7 @@ fun BoxScope.AvatarValueItem(thumbnailUrl: String, modifier: Modifier) {
         placeholder = painterResource(R.drawable.ic_launcher_foreground),
         contentDescription = "Avatar item thumbnail picture",
         contentScale = ContentScale.Fit,
-        modifier = modifier.size(80.dp).padding(dimensionResource(R.dimen.padding_tiny)).align(Alignment.Center)
+        modifier = modifier.size(dimensionResource(R.dimen.min_record_height)).padding(dimensionResource(R.dimen.padding_tiny)).align(Alignment.Center)
     )
 }
 

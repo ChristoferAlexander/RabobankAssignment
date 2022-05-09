@@ -3,4 +3,7 @@
     <dimen name="padding_tiny">2dp</dimen>
     <dimen name="padding_small">4dp</dimen>
     <dimen name="padding_normal">8dp</dimen>
+
+    <dimen name="min_header_height">50dp</dimen>
+    <dimen name="min_record_height">80dp</dimen>
 </resources>
