@@ -15,15 +15,15 @@ val Typography = Typography()
 val Typography.headerTextStyle: TextStyle
     @Composable
     get() = TextStyle(
-        fontSize = 16.sp,
+        fontSize = 12.sp,
         textAlign = TextAlign.Center,
-        fontWeight = FontWeight.Bold
+        fontWeight = FontWeight.Bold,
     )
 
 val Typography.stringTextStyle: TextStyle
     @Composable
     get() = TextStyle(
-        fontSize = 12.sp,
+        fontSize = 10.sp,
         textAlign = TextAlign.Center
     )
 
@@ -32,7 +32,7 @@ val Typography.intTextStyle: TextStyle
     @Composable
     get() = TextStyle(
         color = Color.Blue,
-        fontSize = 18.sp,
+        fontSize = 14.sp,
         textAlign = TextAlign.Center
     )
 
@@ -40,6 +40,6 @@ val Typography.dateTextStyle: TextStyle
     @Composable
     get() = TextStyle(
         fontFamily = FontFamily.Monospace,
-        fontSize = 14.sp,
+        fontSize = 10.sp,
         textAlign = TextAlign.Center
     )
