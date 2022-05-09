@@ -7,7 +7,11 @@ import okhttp3.ResponseBody
 import javax.inject.Inject
 import javax.inject.Singleton
 
+interface CsvRepo{
+    suspend fun invoke(): ApiResult<ResponseBody>
+}
+
 @Singleton
-class CsvRepo @Inject constructor(private val csvApi: CsvApi) {
-    suspend fun invoke(): ApiResult<ResponseBody> = withContext(Dispatchers.IO) { csvApi.getCsvFile() }
+class CsvRepoImp @Inject constructor(private val csvApi: CsvApi) : CsvRepo {
+    override suspend fun invoke(): ApiResult<ResponseBody> = withContext(Dispatchers.IO) { csvApi.getCsvFile() }
 }

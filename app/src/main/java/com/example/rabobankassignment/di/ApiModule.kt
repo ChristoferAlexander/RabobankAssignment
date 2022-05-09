@@ -7,13 +7,16 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
-@InstallIn(SingletonComponent::class)
 @Module
-class ApiProvider {
+@InstallIn(SingletonComponent::class)
+open class ApiModule {
+
+    protected open fun baseUrl() = API_URL.toHttpUrl()
 
     @Provides
     @Singleton
@@ -30,7 +33,7 @@ class ApiProvider {
             .Builder()
             .client(okHttpClient)
             .addCallAdapterFactory(NetworkResultCallAdapterFactory.create())
-            .baseUrl(API_URL)
+            .baseUrl(baseUrl())
             .build()
 
     @Provides
