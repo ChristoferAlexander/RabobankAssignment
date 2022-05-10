@@ -86,12 +86,6 @@ class TestCsvWithoutHeader {
         }
         val mappedResult = csvTable.csvRecordResults.map { it as Success }
 
-        assertTrue(mappedResult[0].record.elements[0].getValue() is StringValue)
-        assertTrue(mappedResult[0].record.elements[1].getValue() is StringValue)
-        assertTrue(mappedResult[0].record.elements[2].getValue() is IntValue)
-        assertTrue(mappedResult[0].record.elements[3].getValue() is DateValue)
-        assertTrue(mappedResult[0].record.elements[4].getValue() is UrlValue)
-
         assertTrue(mappedResult[1].record.elements[0].getValue() is StringValue)
         assertTrue(mappedResult[1].record.elements[1].getValue() is StringValue)
         assertTrue(mappedResult[1].record.elements[2].getValue() is IntValue)
@@ -99,36 +93,14 @@ class TestCsvWithoutHeader {
         assertTrue(mappedResult[1].record.elements[4].getValue() is UrlValue)
         assertTrue(mappedResult[1].record.elements[5].getValue() is StringValue)
 
-        assertEquals(((mappedResult[0].record.elements[0].getValue() as StringValue).stringValue), "Theo")
         assertEquals(((mappedResult[1].record.elements[0].getValue() as StringValue).stringValue), "Fiona")
-        assertEquals(((mappedResult[2].record.elements[0].getValue() as StringValue).stringValue), "Petra")
-
-        assertEquals(((mappedResult[0].record.elements[1].getValue() as StringValue).stringValue), "Jansen")
         assertEquals(((mappedResult[1].record.elements[1].getValue() as StringValue).stringValue), "de Vries")
-        assertEquals(((mappedResult[2].record.elements[1].getValue() as StringValue).stringValue), "Boersma")
-
-        assertEquals(((mappedResult[0].record.elements[2].getValue() as IntValue).intValue), 5)
         assertEquals(((mappedResult[1].record.elements[2].getValue() as IntValue).intValue), 7)
-        assertEquals(((mappedResult[2].record.elements[2].getValue() as IntValue).intValue), 1)
-
-        assertEquals(((mappedResult[0].record.elements[3].getValue() as DateValue).dateValue), "02-01-1978")
         assertEquals(((mappedResult[1].record.elements[3].getValue() as DateValue).dateValue), "12-11-1950")
-        assertEquals(((mappedResult[2].record.elements[3].getValue() as DateValue).dateValue), "20-04-2001")
-
-        assertEquals(
-            ((mappedResult[0].record.elements[4].getValue() as UrlValue).urlValue),
-            "https://api.multiavatar.com/2cdf5db9b4dee297b7.png"
-        )
         assertEquals(
             ((mappedResult[1].record.elements[4].getValue() as UrlValue).urlValue),
             "https://api.multiavatar.com/b9339cb9e7a833cd5e.png"
         )
-        assertEquals(
-            ((mappedResult[2].record.elements[4].getValue() as UrlValue).urlValue),
-            "https://api.multiavatar.com/2672c49d6099f87274.png"
-        )
-
-        // assert extra line arg
         assertEquals(
             ((mappedResult[1].record.elements[5].getValue() as StringValue).stringValue),
             "extra line arg"

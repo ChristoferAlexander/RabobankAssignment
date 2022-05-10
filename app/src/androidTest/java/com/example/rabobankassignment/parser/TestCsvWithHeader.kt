@@ -75,6 +75,43 @@ class TestCsvWithHeader {
     }
 
     @Test
+    fun test_unquoted_records() {
+        // Jan,sen
+        val csvStream: InputStream = """First name,Sur name,Issue count,Date of birth,avatar
+Theo,Jansen,5,1978-01-02T00:00:00,https://api.multiavatar.com/2cdf5db9b4dee297b7.png"""
+            .toInputStream()
+
+        val csvTable = parseCsv(CsvSourceConfig(csvStream))
+        assertEquals(csvTable.header!!.columnNames.size, 5)
+        assertEquals(csvTable.csvRecordResults.size, 1)
+        assertEquals(csvTable.header!!.columnNames[0], "First name")
+        assertEquals(csvTable.header!!.columnNames[1], "Sur name")
+        assertEquals(csvTable.header!!.columnNames[2], "Issue count")
+        assertEquals(csvTable.header!!.columnNames[3], "Date of birth")
+        assertEquals(csvTable.header!!.columnNames[4], "avatar")
+        csvTable.csvRecordResults.forEach { recordResult ->
+            assertTrue(recordResult is CsvRecordResult.Success)
+        }
+
+        val mappedResult = csvTable.csvRecordResults.map { it as CsvRecordResult.Success }
+        mappedResult.forEach { record ->
+            assertTrue(record.record.elements[0].getValue() is StringValue)
+            assertTrue(record.record.elements[1].getValue() is StringValue)
+            assertTrue(record.record.elements[2].getValue() is IntValue)
+            assertTrue(record.record.elements[3].getValue() is DateValue)
+            assertTrue(record.record.elements[4].getValue() is UrlValue)
+        }
+        assertEquals(((mappedResult[0].record.elements[0].getValue() as StringValue).stringValue), "Theo")
+        assertEquals(((mappedResult[0].record.elements[1].getValue() as StringValue).stringValue), "Jansen")
+        assertEquals(((mappedResult[0].record.elements[2].getValue() as IntValue).intValue), 5)
+        assertEquals(((mappedResult[0].record.elements[3].getValue() as DateValue).dateValue), "02-01-1978")
+        assertEquals(
+            ((mappedResult[0].record.elements[4].getValue() as UrlValue).urlValue),
+            "https://api.multiavatar.com/2cdf5db9b4dee297b7.png"
+        )
+    }
+
+    @Test
     fun test_record_element_with_comma() {
         val csvStream: InputStream = """"First name","Sur name","Issue count","Date of birth","avatar"
 "Petra","Boersma, the great",1,"2001-04-20T00:00:00","https://api.multiavatar.com/2672c49d6099f87274.png""""
@@ -111,6 +148,38 @@ class TestCsvWithHeader {
         val mappedResult = csvTable.csvRecordResults.map { it as CsvRecordResult.Success }
         assertEquals(mappedResult.size, 0)
         assertEquals(csvTable.header!!.columnNames.size, 0)
+    }
+
+    @Test
+    fun test_uneven_quotes_in_record() {
+        // "Jan"sen"
+        val csvStream: InputStream = """"First name","Sur name","Issue count","Date of birth","avatar"
+"Theo","Jan"sen",5,"1978-01-02T00:00:00","https://api.multiavatar.com/2cdf5db9b4dee297b7.png"
+"Fiona","de Vries",7,"1950-11-12T00:00:00","https://api.multiavatar.com/b9339cb9e7a833cd5e.png""""
+            .toInputStream()
+
+        val csvTable = parseCsv(CsvSourceConfig(csvStream))
+        assertEquals(csvTable.header!!.columnNames.size, 5)
+        assertEquals(csvTable.csvRecordResults.size, 2)
+
+        val firstRecord = csvTable.csvRecordResults[0]
+        val secondRecord = csvTable.csvRecordResults[1]
+
+        assert(firstRecord is CsvRecordResult.Failure)
+        assert(secondRecord is CsvRecordResult.Success)
+    }
+
+    @Test
+    fun test_unquoted_separator_in_record() {
+        // Jan,sen
+        val csvStream: InputStream = """"First name","Sur name","Issue count","Date of birth","avatar"
+"Theo",Jan,sen,5,"1978-01-02T00:00:00","https://api.multiavatar.com/2cdf5db9b4dee297b7.png""""
+            .toInputStream()
+
+        val csvTable = parseCsv(CsvSourceConfig(csvStream))
+        assertEquals(csvTable.header!!.columnNames.size, 5)
+        assertEquals(csvTable.csvRecordResults.size, 1)
+        assert(csvTable.csvRecordResults[0] is CsvRecordResult.Failure)
     }
 }
 

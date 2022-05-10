@@ -23,7 +23,7 @@ import javax.inject.Inject
 /*
 @HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
-// TODO fix injection error
+// TODO fix injection error of Navigator for ViewModel
 class DownloadScreenTest {
 
     @get:Rule(order = 1)
