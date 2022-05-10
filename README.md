@@ -49,8 +49,6 @@ There are two NavRoutes that the app can navigate to, [Download](https://github.
 
 You can do a back action and redownload the CSV file.
 
-## Disclaimer
-
 I spent four days on the project and there was a lot of ground to cover regarding native Android development as I was more focused on the KMM Android side of development for the past year. I also used tech stacks I was not very familiar with which are still not stable such as Compose with Hilt resulting in a steep learning curve which limited my actual development time for business logic and UI polishing. 
 
 The main focus was around making the project as much extendable as possible in the early stage of development so new features can be easily added without a lot of boilerplate code 
